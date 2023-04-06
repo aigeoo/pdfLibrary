@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+        "target": "ES2016",
+        "strict": true, 
+        "sourceMap": true,
+        "esModuleInterop": true, 
+        "resolveJsonModule": true,
+        "rootDir": "./src",
+        "outDir": "./dist",
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "dist"]
+}
