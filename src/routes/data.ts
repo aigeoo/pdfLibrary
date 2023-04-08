@@ -1,4 +1,5 @@
 import express, { Router } from 'express';
+import { auth } from '../middlewares/verify.js';
 import {
     create,
     index,
@@ -13,14 +14,14 @@ import {
 
 const dataRouter: Router = express.Router();
 
-dataRouter.post('/create', create);
-dataRouter.get('/all', index);
-dataRouter.post('/search/sentences', searchSentences);
-dataRouter.post('/search/word', searchWord);
-dataRouter.post('/search/topwords', searchTopFive);
-dataRouter.post('/search/wordcount', searchWordCount);
-dataRouter.post('/search/image', searchPageImage);
-dataRouter.post('/download', download);
-dataRouter.delete('/delete', destroy);
+dataRouter.post('/create', auth, create);
+dataRouter.get('/all', auth, index);
+dataRouter.post('/search/sentences', auth, searchSentences);
+dataRouter.post('/search/word', auth, searchWord);
+dataRouter.post('/search/topwords', auth, searchTopFive);
+dataRouter.post('/search/wordcount', auth, searchWordCount);
+dataRouter.post('/search/image', auth, searchPageImage);
+dataRouter.post('/download', auth, download);
+dataRouter.delete('/delete', auth, destroy);
 
 export { dataRouter };
