@@ -1,5 +1,6 @@
-import express, { Application } from 'express';
+import express, { Application, Request } from 'express';
 import helmet from 'helmet';
+import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import { authRouter } from './routes/auth.js';
@@ -11,12 +12,12 @@ const app: Application = express();
 const port: number | string = process.env.PORT || 3000;
 const dbUri: string = process.env.DB_URI || '';
 
-
 mongoose
     .connect(dbUri)
     .then(() => console.log('Database is connected successfully...'))
     .catch((err) => console.error(`Database connection error: ${err}`));
 
+app.use(cors<Request>());
 app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
