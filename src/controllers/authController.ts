@@ -5,14 +5,10 @@ import bcrypt from "bcrypt";
 const register = async (req: Request, res: Response) => {
     const { username, password } = req.body;
 
-    if (!password || !username) {
-        return res.status(400).send('Username & Password are required');
-    }
+    let error: string | undefined = validator(res, username, password);
 
-    const usernameRegex = /^[a-zA-Z0-9_$%@\!&]+$/;
-    const passwordRegex = /^.{8,16}$/;
-    if (!usernameRegex.test(username) || !passwordRegex.test(password)) {
-        return res.status(400).send('Invalid username or password');
+    if (error) {
+        return res.status(401).send(error);
     }
 
     const existingUser = await User.findOne({ username });
@@ -35,6 +31,12 @@ const register = async (req: Request, res: Response) => {
 const login = async (req: Request, res: Response) => {
     const { username, password } = req.body;
 
+    let error: string | undefined = validator(res, username, password);
+
+    if (error) {
+        return res.status(401).send(error);
+    }
+
     try {
         let user = await User.findOne({ username });
         if (!user) {
@@ -50,5 +52,19 @@ const login = async (req: Request, res: Response) => {
         return res.status(500).send('Internal Server Error');
     };
 };
+
+function validator(res: Response, username: string, password: string): string | undefined
+{
+    let message: string;
+    if (!password || !username) {
+        return message = 'Username & Password are required';
+    }
+
+    const usernameRegex = /^[a-zA-Z0-9_$%@\!&]+$/;
+    const passwordRegex = /^.{8,16}$/;
+    if (!usernameRegex.test(username) || !passwordRegex.test(password)) {
+        return message = 'Invalid username or password';
+    }
+}
 
 export { register, login };

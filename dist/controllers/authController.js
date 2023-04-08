@@ -11,13 +11,9 @@ import User from '../models/user.js';
 import bcrypt from "bcrypt";
 const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, password } = req.body;
-    if (!password || !username) {
-        return res.status(400).send('Username & Password are required');
-    }
-    const usernameRegex = /^[a-zA-Z0-9_$%@\!&]+$/;
-    const passwordRegex = /^.{8,16}$/;
-    if (!usernameRegex.test(username) || !passwordRegex.test(password)) {
-        return res.status(400).send('Invalid username or password');
+    let error = validator(res, username, password);
+    if (error) {
+        return res.status(401).send(error);
     }
     const existingUser = yield User.findOne({ username });
     if (existingUser) {
@@ -36,6 +32,10 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, password } = req.body;
+    let error = validator(res, username, password);
+    if (error) {
+        return res.status(401).send(error);
+    }
     try {
         let user = yield User.findOne({ username });
         if (!user) {
@@ -53,5 +53,16 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
     ;
 });
+function validator(res, username, password) {
+    let message;
+    if (!password || !username) {
+        return message = 'Username & Password are required';
+    }
+    const usernameRegex = /^[a-zA-Z0-9_$%@\!&]+$/;
+    const passwordRegex = /^.{8,16}$/;
+    if (!usernameRegex.test(username) || !passwordRegex.test(password)) {
+        return message = 'Invalid username or password';
+    }
+}
 export { register, login };
 //# sourceMappingURL=authController.js.map
