@@ -11,6 +11,9 @@ import User from '../models/user.js';
 import bcrypt from "bcrypt";
 const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, password } = req.body;
+    if (!password || !username) {
+        return res.status(400).send('Username & Password are required');
+    }
     const usernameRegex = /^[a-zA-Z0-9_$%@\!&]+$/;
     const passwordRegex = /^.{8,16}$/;
     if (!usernameRegex.test(username) || !passwordRegex.test(password)) {

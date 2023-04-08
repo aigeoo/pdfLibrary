@@ -5,6 +5,10 @@ import bcrypt from "bcrypt";
 const register = async (req: Request, res: Response) => {
     const { username, password } = req.body;
 
+    if (!password || !username) {
+        return res.status(400).send('Username & Password are required');
+    }
+
     const usernameRegex = /^[a-zA-Z0-9_$%@\!&]+$/;
     const passwordRegex = /^.{8,16}$/;
     if (!usernameRegex.test(username) || !passwordRegex.test(password)) {
