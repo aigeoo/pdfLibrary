@@ -14,14 +14,14 @@ import {
 
 const dataRouter: Router = express.Router();
 
-dataRouter.post('/create', auth, create);
 dataRouter.get('/all', auth, index);
-dataRouter.post('/search/sentences', auth, searchSentences);
-dataRouter.post('/search/word', auth, searchWord);
-dataRouter.post('/search/topwords', auth, searchTopFive);
+dataRouter.get('/search/sentences/:id', auth, searchSentences);
+dataRouter.get('/search/word/:word', auth, searchWord);
+dataRouter.get('/search/topwords/:id', auth, searchTopFive);
+dataRouter.get('/download/:id', auth, download);
+dataRouter.post('/create', auth, create);
 dataRouter.post('/search/wordcount', auth, searchWordCount);
 dataRouter.post('/search/image', auth, searchPageImage);
-dataRouter.post('/download', auth, download);
-dataRouter.delete('/delete', auth, destroy);
+dataRouter.delete('/delete/:id', auth, destroy);
 
 export { dataRouter };
