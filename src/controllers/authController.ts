@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import User from '../models/user.js';
-import bcrypt from "bcrypt";
+import bcrypt from 'bcrypt';
 
 const register = async (req: Request, res: Response) => {
     const { username, password } = req.body;
@@ -13,7 +13,7 @@ const register = async (req: Request, res: Response) => {
 
     const existingUser = await User.findOne({ username });
     if (existingUser) {
-        return res.status(400).send('Username already exists');
+        return res.status(400).send('Username Already Exists');
     }
 
     const salt = await bcrypt.genSalt(10);

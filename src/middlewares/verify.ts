@@ -3,7 +3,7 @@ import User from '../models/user.js';
 
 const auth = async (req: Request, res: Response, next: NextFunction) => {
     const authHeader = req.headers.authorization;
-    if (!authHeader) {
+    if (! authHeader) {
         return res.status(401).send('Authentication Header Required');
     }
 
@@ -14,8 +14,8 @@ const auth = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const user = await User.findOne({ username, password });
 
-        if (!user) {
-        return res.status(401).send('Authentication Failed');
+        if (! user) {
+            return res.status(401).send('Authentication Failed');
         }
 
         next();

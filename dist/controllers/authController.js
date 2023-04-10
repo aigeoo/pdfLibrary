@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import User from '../models/user.js';
-import bcrypt from "bcrypt";
+import bcrypt from 'bcrypt';
 const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, password } = req.body;
     let error = validator(res, username, password);
@@ -17,7 +17,7 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
     const existingUser = yield User.findOne({ username });
     if (existingUser) {
-        return res.status(400).send('Username already exists');
+        return res.status(400).send('Username Already Exists');
     }
     const salt = yield bcrypt.genSalt(10);
     const hashedPassword = yield bcrypt.hash(password, salt);
