@@ -1,16 +1,26 @@
 import mongoose from 'mongoose';
 const schema = new mongoose.Schema({
-    id: { type: Number, required: true },
-    fileName: { type: String, required: true },
-    created_at: { type: Date, required: true },
-    pages: { type: Number, required: true },
-    fileSize: { type: Number, required: true },
-    content: [
-        {
-            index: { type: Number, required: true },
-            text: { type: String, required: true },
-        },
-    ],
+    _id: {
+        type: Number, required: true
+    },
+    name: {
+        type: String, required: true
+    },
+    created_at: {
+        type: Date,
+        default: () => new Date().toLocaleString(),
+        required: true
+    },
+    pages: {
+        type: Number, required: true
+    },
+    path: {
+        type: String, required: true
+    },
+    size: {
+        type: Number, required: true
+    },
+    content: Array,
 });
 export default mongoose.model('Data', schema);
 //# sourceMappingURL=data.js.map
