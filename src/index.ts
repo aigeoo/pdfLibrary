@@ -3,6 +3,7 @@ import helmet from 'helmet';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import { apiRequestLimiter } from './middlewares/limiter.js'
 import { authRouter } from './routes/auth.js';
 import { dataRouter } from './routes/data.js';
 
@@ -19,6 +20,7 @@ mongoose
 
 app.use(cors<Request>());
 app.use(helmet());
+app.use(apiRequestLimiter)
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
