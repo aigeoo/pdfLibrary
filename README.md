@@ -1,8 +1,6 @@
 # pdfLibrary
 pdfLibrary is an API that provides basic CRUD operations on PDF documents, with features like text extraction and searching.
 
-<br />
-
 ## Installation
 
 1. Clone the project: `git clone https://github.com/aigeoo/pdfLibrary.git`
@@ -12,8 +10,6 @@ pdfLibrary is an API that provides basic CRUD operations on PDF documents, with 
 5. Build the application: `npm build`
 6. Run `npm start` 
 8. Browse the application on http://127.0.0.1:3000
-
-<br />
 
 ------
 ## Installation using docker
@@ -25,8 +21,6 @@ pdfLibrary is an API that provides basic CRUD operations on PDF documents, with 
 4. Build the Docker image: `docker build -t <image-name> .`
 5. Run the Docker container: `docker run -p 3000:3000 <image-name>`
 6. Browse the application on http://127.0.0.1:3000
-
-<br />
 
 ------
 ## Examples
